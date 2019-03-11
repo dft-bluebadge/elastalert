@@ -1,0 +1,23 @@
+name: No_app_submissions_in_10_mins
+description: 'Logging from the applicationmanagement service suggests that the number of new blue badges requested by citizens has slowed or stopped. There are two near-identical log entries for each submission'
+type: flatline
+index: filebeat-*
+threshold: 2
+use_count_query: true
+doc_type: doc
+timeframe:
+  minutes: 10
+realert:
+  minutes: 5
+exponential_realert:
+  minutes: 60
+filter:
+- query:
+    query_string:
+      query: "beat.name:applicationmanagement AND message:\"creating application\""
+alert:
+ - slack
+slack:
+slack_webhook_url: "https://hooks.slack.com/services/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"
+match_enhancements:
+- "elastalert_modules.bbworkingweek.BBWorkingWeek"
