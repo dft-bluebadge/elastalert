@@ -1,0 +1,20 @@
+name: no_aps_batch_received_for_24_hrs
+type: flatline
+index: filebeat-*
+threshold: 1
+use_count_query: true
+doc_type: doc
+timeframe:
+  days: 1
+realert:
+  hours: 12
+filter:
+- query:
+    query_string:
+      query: "beat.name:badgemanagement AND message:\"Finished processing batch\""
+alert:
+ - slack
+slack:
+slack_webhook_url: "https://hooks.slack.com/services/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"
+match_enhancements:
+- "elastalert_modules.bbworkingweek.BBWorkingWeek"
