@@ -1,0 +1,13 @@
+[Unit]
+Description=ElastAlert in Docker
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/docker start -a elastalert
+ExecStop=/usr/bin/docker stop -t 2 elastalert
+
+[Install]
+WantedBy=default.target
+
