@@ -8,5 +8,5 @@ class BBWorkingWeek(BaseEnhancement):
             raise DropMatchException
         if datetime.datetime.now().hour < 9:
             raise DropMatchException
-        if datetime.datetime.now().hour > 17:
+        if datetime.datetime.now().hour >= 17:
             raise DropMatchException
