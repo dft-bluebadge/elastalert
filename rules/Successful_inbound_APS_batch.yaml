@@ -11,7 +11,7 @@ realert:
 filter:
 - query:
     query_string:
-      query: "beat.name:badgemanagement AND message:\"Finished processing batch\""
+      query: "kubernetes.pod.name:badgemanagement-service AND message:\"Finished processing batch\""
 alert:
  - slack
 slack:

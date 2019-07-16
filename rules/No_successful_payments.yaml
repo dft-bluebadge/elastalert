@@ -1,12 +1,12 @@
-name: No_successful_payments_for_30_mins
-description: 'Logging from the payment service suggests that the successful payment callbacks from GOV.UK Pay have stopped.'
+name: No_successful_payments_for_60_mins
+description: 'Logging from the payment service suggests that the successful payment responses from GOV.UK Pay have stopped.'
 type: flatline
 index: filebeat-*
 threshold: 1
 use_count_query: true
 doc_type: doc
 timeframe:
-  minutes: 30
+  minutes: 60
 realert:
   minutes: 10
 exponential_realert:

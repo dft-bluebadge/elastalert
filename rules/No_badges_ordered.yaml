@@ -14,7 +14,7 @@ exponential_realert:
 filter:
 - query:
     query_string:
-      query: "beat.name:badgemanagement AND message:BADGE_ORDERED"
+      query: "beat.name:badgemanagement AND message:uk.gov.dft.bluebadge.service.badgemanagement.controller.BadgesApiController.orderBlueBadges"
 alert:
  - slack
 slack:
