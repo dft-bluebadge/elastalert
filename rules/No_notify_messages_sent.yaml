@@ -1,8 +1,8 @@
-name: No_uploads_in_10_mins
-description: 'Logging from the badgemanagement service suggests that photo uploads have stopped.'
+name: no_notify_messages_sent_for_10_mins
+description: 'Logging from the message service suggests that messages to GOV.UK Notify are not being sent.'
 type: flatline
 index: filebeat-*
-threshold: 2
+threshold: 1
 use_count_query: true
 doc_type: doc
 timeframe:
@@ -10,11 +10,11 @@ timeframe:
 realert:
   minutes: 5
 exponential_realert:
-  minutes: 60
+  minutes: 30
 filter:
 - query:
     query_string:
-      query: "beat.name:badgemanagement AND message:\"photo upload successful\""
+      query: "bluebadge.message:\"Successfully sent\" AND bluebadge.message:\"Notify ref\""
 alert:
  - slack
 slack:

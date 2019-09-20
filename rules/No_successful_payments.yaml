@@ -1,12 +1,12 @@
-name: no_badges_ordered_for_30_mins
-description: 'Logging from the badgemanagement service suggests that the number of successful badge orders has stopped.'
+name: No_successful_payments_for_60_mins
+description: 'Logging from the payment service suggests that the successful payment responses from GOV.UK Pay have stopped.'
 type: flatline
 index: filebeat-*
 threshold: 1
 use_count_query: true
 doc_type: doc
 timeframe:
-  minutes: 30
+  minutes: 60
 realert:
   minutes: 10
 exponential_realert:
@@ -14,11 +14,10 @@ exponential_realert:
 filter:
 - query:
     query_string:
-      query: "beat.name:badgemanagement AND message:uk.gov.dft.bluebadge.service.badgemanagement.controller.BadgesApiController.orderBlueBadges"
+      query: "bluebadge.logger_name:uk.gov.dft.bluebadge.webapp.citizen.controllers.PaymentController AND bluebadge.message:\"Successful payment\""
 alert:
  - slack
 slack:
 slack_webhook_url: "https://hooks.slack.com/services/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"
 match_enhancements:
 - "elastalert_modules.bbworkingweek.BBWorkingWeek"
-

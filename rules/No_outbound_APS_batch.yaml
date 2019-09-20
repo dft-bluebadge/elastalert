@@ -1,24 +1,20 @@
-name: no_notify_messages_sent_for_10_mins
-description: 'Logging from the message service suggests that messages to GOV.UK Notify are not being sent.'
+name: no_aps_batch_sent_for_24_hrs
 type: flatline
 index: filebeat-*
 threshold: 1
 use_count_query: true
 doc_type: doc
 timeframe:
-  minutes: 10
+  days: 1
 realert:
-  minutes: 5
-exponential_realert:
-  minutes: 30
+  hours: 12
 filter:
 - query:
     query_string:
-      query: "beat.name:message AND message:\"Successfully sent\" AND message:\"Notify ref\""
+      query: "bluebadge.application:\"Print Service\" AND bluebadge.message:\"Sftp complete\""
 alert:
  - slack
 slack:
 slack_webhook_url: "https://hooks.slack.com/services/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"
 match_enhancements:
 - "elastalert_modules.bbworkingweek.BBWorkingWeek"
-

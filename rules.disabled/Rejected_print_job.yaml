@@ -1,17 +1,19 @@
-name: no_aps_batch_sent_for_24_hrs
+name: print_job_rejected_for_60_mins
 type: flatline
 index: filebeat-*
 threshold: 1
 use_count_query: true
 doc_type: doc
 timeframe:
-  days: 1
+  minutes: 60
 realert:
-  hours: 12
+  minutes: 10
+exponential_realert:
+  minutes: 60
 filter:
 - query:
     query_string:
-      query: "beat.name:print AND message:\"Sftp complete\""
+      query: "bluebadge.message:\"\""
 alert:
  - slack
 slack:
