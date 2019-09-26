@@ -1,10 +1,10 @@
 name: No_LA_sign-ins_for_10_mins
-description: 'Logging from the la-webapp service suggests that no LAs are able to log in.'
+description: "Logging from the la-webapp service suggests that no LAs are able to log in."
 type: flatline
 index: filebeat-*
 threshold: 1
 use_count_query: true
-doc_type: doc
+doc_type: _doc
 timeframe:
   minutes: 10
 realert:
@@ -12,13 +12,12 @@ realert:
 exponential_realert:
   minutes: 30
 filter:
-- query:
-    query_string:
-      query: "bluebadge.application:\"LA Web App\" AND bluebadge.message:\"uk.gov.dft.bluebadge.webapp.la.controller.SignInController.startSignIn\""
+  - query:
+      query_string:
+        query: 'bluebadge.application:"LA Web App" AND bluebadge.message:"uk.gov.dft.bluebadge.webapp.la.controller.SignInController.startSignIn"'
 alert:
- - slack
+  - slack
 slack:
 slack_webhook_url: "https://hooks.slack.com/services/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"
 match_enhancements:
-- "elastalert_modules.bbworkingweek.BBWorkingWeek"
-
+  - "elastalert_modules.bbworkingweek.BBWorkingWeek"

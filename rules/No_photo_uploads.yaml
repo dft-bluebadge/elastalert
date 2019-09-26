@@ -1,10 +1,10 @@
 name: No_uploads_in_10_mins
-description: 'Logging from the badgemanagement service suggests that photo uploads have stopped.'
+description: "Logging from the badgemanagement service suggests that photo uploads have stopped."
 type: flatline
 index: filebeat-*
 threshold: 2
 use_count_query: true
-doc_type: doc
+doc_type: _doc
 timeframe:
   minutes: 10
 realert:
@@ -12,13 +12,12 @@ realert:
 exponential_realert:
   minutes: 60
 filter:
-- query:
-    query_string:
-      query: "bluebadge.message:\"photo upload successful\""
+  - query:
+      query_string:
+        query: 'bluebadge.message:"Uploading document to S3"'
 alert:
- - slack
+  - slack
 slack:
 slack_webhook_url: "https://hooks.slack.com/services/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"
 match_enhancements:
-- "elastalert_modules.bbworkingweek.BBWorkingWeek"
-
+  - "elastalert_modules.bbworkingweek.BBWorkingWeek"

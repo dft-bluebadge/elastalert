@@ -1,10 +1,10 @@
 name: no_badges_ordered_for_30_mins
-description: 'Logging from the badgemanagement service suggests that the number of successful badge orders has stopped.'
+description: "Logging from the badgemanagement service suggests that the number of successful badge orders has stopped."
 type: flatline
 index: filebeat-*
 threshold: 1
 use_count_query: true
-doc_type: doc
+doc_type: _doc
 timeframe:
   minutes: 30
 realert:
@@ -12,13 +12,12 @@ realert:
 exponential_realert:
   minutes: 60
 filter:
-- query:
-    query_string:
-      query: "bluebadge.event:BADGE_ORDERED"
+  - query:
+      query_string:
+        query: "bluebadge.event:BADGE_ORDERED"
 alert:
- - slack
+  - slack
 slack:
 slack_webhook_url: "https://hooks.slack.com/services/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"
 match_enhancements:
-- "elastalert_modules.bbworkingweek.BBWorkingWeek"
-
+  - "elastalert_modules.bbworkingweek.BBWorkingWeek"

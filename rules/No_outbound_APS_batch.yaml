@@ -3,7 +3,7 @@ type: flatline
 index: filebeat-*
 threshold: 1
 use_count_query: true
-doc_type: doc
+doc_type: _doc
 timeframe:
   days: 1
 realert:
