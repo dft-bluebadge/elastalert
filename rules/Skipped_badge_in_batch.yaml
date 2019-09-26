@@ -1,0 +1,21 @@
+name: Skipped_badge_2_hours
+description: "Skipped badge was detected in batch"
+type: frequency
+index: filebeat-*
+num_events: 1
+use_count_query: true
+doc_type: _doc
+timeframe:
+  hours: 2
+realert:
+  hours: 1
+filter:
+  - query:
+      query_string:
+        query: 'bluebadge.message:"Skipping badge"'
+alert:
+  - slack
+slack:
+slack_webhook_url: "https://hooks.slack.com/services/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"
+match_enhancements:
+  - "elastalert_modules.bbworkingweek.BBWorkingWeek"
