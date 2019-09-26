@@ -4,7 +4,7 @@ type: flatline
 index: filebeat-*
 threshold: 1
 use_count_query: true
-doc_type: doc
+doc_type: _doc
 timeframe:
   minutes: 10
 realert:
@@ -14,7 +14,7 @@ exponential_realert:
 filter:
 - query:
     query_string:
-      query: "beat.name:message AND message:\"Successfully sent\" AND message:\"Notify ref\""
+      query: "bluebadge.message:\"Successfully sent\" AND bluebadge.message:\"Notify ref\""
 alert:
  - slack
 slack:

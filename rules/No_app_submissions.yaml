@@ -4,7 +4,7 @@ type: flatline
 index: filebeat-*
 threshold: 2
 use_count_query: true
-doc_type: doc
+doc_type: _doc
 timeframe:
   minutes: 10
 realert:
@@ -14,7 +14,7 @@ exponential_realert:
 filter:
 - query:
     query_string:
-      query: "beat.name:applicationmanagement AND message:\"creating application\""
+      query: "bluebadge.message: \"creating application\""
 alert:
  - slack
 slack:
